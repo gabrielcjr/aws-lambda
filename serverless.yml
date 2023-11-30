@@ -1,0 +1,53 @@
+service: golang-serveless-video-with-dynamo
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: go1.x
+  stage: dev
+  region: us-east-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+            - dynamodb:Scan
+          Resource: 
+            - "arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/ProductsVideo"
+
+package:
+  patterns:
+    - '!./**'
+    - ./bin/**
+
+functions:
+  insert:
+    handler: bin/InsertProduct
+    events:
+      - httpApi:
+          path: /products
+          method: post
+  list:
+    handler: bin/ListProducts
+    events:
+      - httpApi:
+          path: /products
+          method: get
+
+resources:
+  Resources:
+    VideoTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ProductsVideo
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

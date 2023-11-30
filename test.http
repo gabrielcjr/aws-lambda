@@ -1,0 +1,10 @@
+POST https://q5xgfyjr7k.execute-api.us-east-1.amazonaws.com/products HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "price": 100
+}
+
+###
+GET https://q5xgfyjr7k.execute-api.us-east-1.amazonaws.com/products HTTP/1.1
