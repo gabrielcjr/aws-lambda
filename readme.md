@@ -9,3 +9,19 @@ make build
 ./node_modules/serverless/bin/serverless.js remove
 
 https://www.youtube.com/watch?v=kpjkSLXHN5E&t=790s
+
+Access required
+
+AmazonAPIGatewayAdministrator
+	
+AmazonDynamoDBFullAccess
+	
+AmazonS3FullAccess
+	
+AWSCloudFormationFullAccess
+	
+AWSLambda_FullAccess
+	
+CloudWatchLogsFullAccess
+	
+IAMFullAccess
